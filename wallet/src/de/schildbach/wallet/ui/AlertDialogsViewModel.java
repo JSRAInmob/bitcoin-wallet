@@ -39,6 +39,7 @@ import de.schildbach.wallet.Constants;
 import de.schildbach.wallet.WalletApplication;
 import de.schildbach.wallet.util.CrashReporter;
 import de.schildbach.wallet.util.Installer;
+import io.github.pixee.security.BoundedLineReader;
 import okhttp3.Call;
 import okhttp3.ConnectionSpec;
 import okhttp3.Headers;
@@ -148,7 +149,7 @@ public class AlertDialogsViewModel extends AndroidViewModel {
                 final Map<String, String> properties = new HashMap<>();
                 try (final BufferedReader reader = new BufferedReader(response.body().charStream())) {
                     while (true) {
-                        final String line = reader.readLine();
+                        final String line = BoundedLineReader.readLine(reader, 5_000_000);
                         if (line == null)
                             break;
                         if (line.charAt(0) == '#')

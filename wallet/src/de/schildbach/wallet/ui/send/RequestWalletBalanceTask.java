@@ -32,6 +32,7 @@ import com.squareup.moshi.Moshi;
 import de.schildbach.wallet.Constants;
 import de.schildbach.wallet.R;
 import de.schildbach.wallet.util.Assets;
+import io.github.pixee.security.BoundedLineReader;
 import okio.BufferedSink;
 import okio.BufferedSource;
 import okio.Okio;
@@ -385,7 +386,7 @@ public final class RequestWalletBalanceTask {
         String line = null;
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             while (true) {
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
                 if (line == null)
                     break;
                 line = line.trim();
