@@ -8,3 +8,4 @@ However if you've got a question or would like to start a discussion, please pos
 If you would like to contribute language translations, we prefer if you use our
 [Transifex project](https://explore.transifex.com/bitcoin-wallet/bitcoin-wallet/). Languages will be
 synced from there regularly.
+JSRAInmob
