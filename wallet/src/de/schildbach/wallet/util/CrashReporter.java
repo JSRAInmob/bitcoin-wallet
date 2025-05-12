@@ -18,6 +18,7 @@
 package de.schildbach.wallet.util;
 
 import android.content.pm.PackageInfo;
+import io.github.pixee.security.BoundedLineReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,7 +82,7 @@ public class CrashReporter {
 
     private static void copy(final BufferedReader in, final Appendable out) throws IOException {
         while (true) {
-            final String line = in.readLine();
+            final String line = BoundedLineReader.readLine(in, 5_000_000);
             if (line == null)
                 break;
 
