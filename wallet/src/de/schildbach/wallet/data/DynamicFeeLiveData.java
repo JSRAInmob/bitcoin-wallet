@@ -26,6 +26,7 @@ import com.google.common.io.ByteStreams;
 import de.schildbach.wallet.Constants;
 import de.schildbach.wallet.WalletApplication;
 import de.schildbach.wallet.ui.send.FeeCategory;
+import io.github.pixee.security.BoundedLineReader;
 import okhttp3.Call;
 import okhttp3.ConnectionSpec;
 import okhttp3.Headers;
@@ -132,7 +133,7 @@ public class DynamicFeeLiveData extends LiveData<Map<FeeCategory, Coin>> {
         String line = null;
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.US_ASCII))) {
             while (true) {
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
                 if (line == null)
                     break;
                 line = line.trim();
